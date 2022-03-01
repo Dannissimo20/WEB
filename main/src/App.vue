@@ -1,29 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <Fio lastName="Буторин" firstName="Дэниель" middleName="Михайлович"/>
+    <Vyatsu :results="results"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import Vue from 'vue';
+import axios from 'axios';
+import Fio from '../../fio/src/main';
+import Vyatsu from '../../vyatsu/src/main';
 
-@Component({
-  components: {
-    HelloWorld,
+const url = 'http://localhost:8080/admission/';
+export default {
+  name: 'App',
+  props: {
+    results: [],
   },
-})
-export default class App extends Vue {}
+  components: {
+    Fio,
+    Vyatsu,
+  },
+  mounted() {
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response);
+        this.results = response.data;
+      })
+      .catch((error: any) => console.log(error));
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
