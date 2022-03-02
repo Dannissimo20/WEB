@@ -2,6 +2,7 @@
   <div>
     <Fio lastName="Буторин" firstName="Дэниель" middleName="Михайлович"/>
     <Vyatsu :results="results"/>
+    <Registration/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import Fio from '../../fio/src/main';
 import Vyatsu from '../../vyatsu/src/main';
+import Registration from '../../registration/src/main';
 
 const url = 'http://localhost:8080/admission/';
 export default {
@@ -20,6 +22,7 @@ export default {
   components: {
     Fio,
     Vyatsu,
+    Registration,
   },
   mounted() {
     axios
